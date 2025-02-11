@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sb.mybatis.postgre.model.ReferralMapper">
+
+    <resultMap id="ReferralList" type="Referral">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name
+    </sql>
+
+    <select id="findAllReferrals" resultMap="ReferralList">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_REFERRAL
+    </select>
+
+    <insert id="insertReferral" parameterType="Referral">
+        INSERT INTO T_REFERRAL(id, name) VALUES(#{id},#{name})
+    </insert>
+
+    <update id="updateReferral" parameterType="Referral">
+        UPDATE T_REFERRAL
+        SET name=#{name}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteReferral">
+        DELETE FROM T_REFERRAL
+        WHERE id=#{id}
+    </delete>
+
+    <select id="selectReferral" resultMap="ReferralList">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_REFERRAL
+        WHERE id=#{id}
+    </select>
+</mapper>
