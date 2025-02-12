@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -20,7 +21,7 @@ public class DBConfig {
 
     //Embedded Datasource (along with schema and test data) should only be created if PostGreSQL is not used (e.g. in local profile)
     @Bean
-    @Profile("local")
+    @Profile({"local"})
     public DataSource dataSource() {
         log.info("Creating Embedded H2 DataSource");
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
