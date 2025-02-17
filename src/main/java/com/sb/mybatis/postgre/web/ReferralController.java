@@ -2,14 +2,11 @@ package com.sb.mybatis.postgre.web;
 
 import com.sb.mybatis.postgre.dto.ReferralDTO;
 import com.sb.mybatis.postgre.service.ReferralService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -18,16 +15,6 @@ public class ReferralController {
 
     @Autowired
     private ReferralService referralService;
-
-    private ReferralDTO newReferralDTO()
-    {
-        return new ReferralDTO(UUID.randomUUID().toString(), "Programmer");
-    }
-
-    private ReferralDTO updatedReferralDTO(String id)
-    {
-        return new ReferralDTO(id, "Software Engineer");
-    }
 
     @GetMapping("/status")
     public String getStatus() {
@@ -42,8 +29,12 @@ public class ReferralController {
     }
 
     @PostMapping
-    public String createTransactions() throws Exception {
+    public ReferralDTO createTransaction(@Valid @RequestBody ReferralDTO referralDTO) throws Exception {
         log.info("ReferralController.createTransactions() is invoked");
-        return (referralService.insertReferral(newReferralDTO()) == 1 ? "Successful" : "Failed");
+        if(referralService.insertReferral(referralDTO) == 1) {
+            //Success
+            return referralDTO;
+        }
+        else throw new Exception("Error in creating new Referral record");
     }
 }
