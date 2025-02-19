@@ -1,6 +1,7 @@
 services:
   sb-referral-service:
     image: 'referral-service:V3'
+    restart: on-failure
     ports:
       - "8081:8081"
     build:
