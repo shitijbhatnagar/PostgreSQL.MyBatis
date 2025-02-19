@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -23,6 +24,9 @@ public class ReferralService {
     }
 
     public int insertReferral(ReferralDTO referralDTO) throws Exception {
+
+        //Assign UUID to the new referral
+        referralDTO.setId(UUID.randomUUID().toString());
 
         //Convert DTO to Entity
         Referral referral = referralEntityDTOMapper.dtoToEntity(referralDTO);

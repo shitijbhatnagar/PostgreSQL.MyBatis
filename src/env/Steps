@@ -1,0 +1,32 @@
+PRIMARY STEPS (Use Docker Compose)
+
+1) Use Dockerfile and spring boot jar to create an image
+- docker build -t sb-referral-service:V1 .
+
+2) Use docker-compose.yml to span up the services
+- docker compose up
+
+3) Consume the service at http://localhost:8081/referrals
+- /referrals/status to get the status of the service
+- /referrals GET to extract all the referrals
+- /referrals POST to add a referral [Note: Use a JSON request containing one value like { "givenName": "Morph" }]
+
+4) Use the following command to stop the services / containers
+- docker compose down
+
+------------------------------------------------------------------------------------------------------------------
+
+ALTERNATIVE OPTION/STEPS (Use Docker Swarm)
+
+Use Step 1 (above), followed by 2.1 (below), 3 (above), and 4.1 (below).
+
+[Option 2.1 - Alternative: Use docker swarm to deploy the services]
+2.1) Use docker-compose.yml to create a container and run the image
+- a) docker swarm init
+- b) docker stack deploy sb-stack -c docker-compose.yml
+
+4.1) Use the following command to stop the services / containers
+- docker stack rm sb-stack
+- docker swarm leave --force
+
+Reference: https://docs.docker.com/compose/how-tos/startup-order/

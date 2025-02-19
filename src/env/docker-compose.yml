@@ -1,0 +1,25 @@
+services:
+  sb-referral-service:
+    image: 'referral-service:V3'
+    ports:
+      - "8081:8081"
+    build:
+      context: .
+    container_name: sb-referral-service
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/test
+      - SPRING_DATASOURCE_USERNAME=test
+      - SPRING_DATASOURCE_PASSWORD=test
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    volumes:
+      - ./db:/var/lib/postgresql/data
+      - ./create-db.sql:/docker-entrypoint-initdb.d/create_database.sql
