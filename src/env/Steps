@@ -3,10 +3,10 @@ PRIMARY STEPS (Use Docker Compose)
 1) Use Dockerfile and spring boot jar to create an image
 - docker build -t sb-referral-service:V1 .
 
-2) Use docker-compose.yml to span up the services
+2) Use docker-compose.yml to span up the services (ensure nginx.conf & create-db.sql are in the same folder)
 - docker compose up
 
-3) Consume the service at http://localhost:8081/referrals
+3) Consume the service at http://localhost:8000/referrals (via NGINX)
 - /referrals/status to get the status of the service
 - /referrals GET to extract all the referrals
 - /referrals POST to add a referral [Note: Use a JSON request containing one value like { "givenName": "Morph" }]
