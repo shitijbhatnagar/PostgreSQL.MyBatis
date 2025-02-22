@@ -1,6 +1,6 @@
 services:
   sb-referral-service:
-    image: 'referral-service:V3'
+    image: 'sb-referral-service:V1'
     ports:
       - "8081:8081"
     build:

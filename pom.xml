@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>PostgreSQL.MyBatis</groupId>
-	<artifactId>PostgreSQL.MyBatis</artifactId>
+	<groupId>Referral</groupId>
+	<artifactId>Referral</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MyBatis with PostgreSQL</name>
-	<description>MyBatis with PostgreSQL</description>
+	<name>Referral Service</name>
+	<description>Simple CRUD with PostgreSQL</description>
 
 	<properties>
 		<java.version>17</java.version>
@@ -107,6 +107,7 @@
 			<artifactId>mapstruct-processor</artifactId>
 			<version>1.5.5.Final</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
